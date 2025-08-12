@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>My Portfolio</title>
+    <link rel="shortcut icon" href="portfolio.png" type="image/x-icon">
+
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+        header {
+            background-color: black;
+            color: white;
+            text-align: center;
+            padding: 10px;
+        }
+        h2 {
+            color: darkblue;
+        }
+        .section {
+            background-color: white;
+            padding: 10px;
+            margin: 10px;
+            border: 1px solid gray;
+        }
+        @media (max-width: 600px) {
+            body {
+                background-color: lightyellow;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1 style="color: white;">My Portfolio</h1> 
+    </header>
+    <center><img src="portfolio1.png" alt="image-1" height="500" width="900"></center>
+
+    <section id="about" class="section">
+        <h2>About Me</h2>
+        <p>Hi!My name is Strelisha Karen Lewis. I'm studying in MIT WPU Pune.I'm in my third year of BTECH. I’m a student who likes coding and making small projects. I am still learning but I enjoy it a lot.</p>
+    </section>
+
+    <section id="skills" class="section">
+        <h2>Skills</h2>
+        <ul>
+            <li>HTML</li>
+            <li>CSS</li>
+            <li>Python</li>
+            <li>Basic JavaScript</li>
+        </ul>
+    </section>
+
+    <section id="contact" class="section">
+        <h2>Contact Me</h2>
+        <form>
+            <input type="text" placeholder="Your Name">
+            <input type="email" placeholder="Your Email">
+            <textarea rows="4" placeholder="Message"></textarea>
+            <button type="submit" style="background-color: green; color: white;">Send</button>
+        </form>
+    </section>
+
+</body>
+</html>
