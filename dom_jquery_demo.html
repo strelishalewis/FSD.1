@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOM and jQuery Manipulation Example</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 30px;
+            background-color: #f4f4f4;
+        }
+        #title {
+            color: #333;
+        }
+        #myText {
+            color: blue;
+            font-size: 20px;
+            margin: 20px;
+        }
+        img {
+            width: 200px;
+            height: 200px;
+            border-radius: 10px;
+            border: 2px solid #ccc;
+        }
+        button {
+            margin: 10px;
+            padding: 10px 15px;
+            font-size: 14px;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+            background-color: #4CAF50;
+            color: white;
+        }
+        #extra {
+            margin-top: 20px;
+        }
+    </style>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            // Change text and style using DOM
+            document.getElementById("btnChangeText").onclick = function() {
+                const p = document.getElementById("myText");
+                p.innerHTML = "Text has been changed using innerHTML and JavaScript!";
+                p.style.color = "red";
+                p.style.fontSize = "22px";
+            };
+
+            // Change image source
+            document.getElementById("btnChangeImg").onclick = function() {
+                document.getElementById("myImage").src = "https://picsum.photos/200?random=" + Math.floor(Math.random() * 100);
+            };
+
+            // Add a new text node
+            document.getElementById("btnAddNode").onclick = function() {
+                const newNode = document.createElement("p");
+                newNode.textContent = "A new paragraph was added dynamically!";
+                document.getElementById("extra").appendChild(newNode);
+            };
+
+            // Delete a node
+            document.getElementById("btnDeleteNode").onclick = function() {
+                const extraDiv = document.getElementById("extra");
+                if (extraDiv.lastChild) {
+                    extraDiv.removeChild(extraDiv.lastChild);
+                } else {
+                    alert("No more nodes to delete!");
+                }
+            };
+
+            // jQuery operations
+            $("#jqBtn").click(function() {
+                $(this).text("jQuery Button Clicked!");
+                $("body").css("background-image", "url('https://picsum.photos/800/600?blur')");
+                $("img").attr("alt", "Changed via jQuery!");
+                alert("jQuery: Background and button text changed!");
+            });
+        });
+    </script>
+</head>
+<body>
+    <h2 id="title">DOM and jQuery Operations</h2>
+    <p id="myText">This is a paragraph to be changed using DOM.</p>
+
+    <img id="myImage" src="https://via.placeholder.com/200" alt="Placeholder Image">
+
+    <div id="extra"></div>
+
+    <button id="btnChangeText">Change Text</button>
+    <button id="btnChangeImg">Change Image</button>
+    <button id="btnAddNode">Add Node</button>
+    <button id="btnDeleteNode">Delete Node</button>
+    <button id="jqBtn">Use jQuery</button>
+</body>
+</html>
