@@ -1,0 +1,106 @@
+// Assignment 3 //
+// Title: Task Manager (React.js)
+
+import React, { useState, useEffect } from 'react';
+
+function Assignment3() {
+  const [tasks, setTasks] = useState(() => {
+    const stored = localStorage.getItem('tasks');
+    return stored ? JSON.parse(stored) : [];
+  });
+  const [task, setTask] = useState('');
+
+  useEffect(() => {
+    localStorage.setItem('tasks', JSON.stringify(tasks));
+  }, [tasks]);
+
+  const addTask = () => {
+    if (task.trim()) {
+      setTasks([...tasks, { id: Date.now(), text: task, completed: false }]);
+      setTask('');
+    }
+  };
+
+  const toggleTask = (id) => {
+    setTasks(tasks.map(t => t.id === id ? { ...t, completed: !t.completed } : t));
+  };
+
+  const deleteTask = (id) => {
+    setTasks(tasks.filter(t => t.id !== id));
+  };
+
+  return (
+    <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-r from-sky-200 to-indigo-200 p-6">
+      <h1 className="text-3xl font-bold mb-6">Task Manager - Assignment 3</h1>
+      <div className="flex gap-2 mb-4">
+        <input
+          type="text"
+          value={task}
+          onChange={(e) => setTask(e.target.value)}
+          placeholder="Enter a task"
+          className="p-2 rounded border w-64"
+        />
+        <button onClick={addTask} className="px-4 py-2 bg-blue-600 text-white rounded">Add</button>
+      </div>
+      <ul className="w-80 space-y-2">
+        {tasks.map(t => (
+          <li key={t.id} className="flex justify-between items-center bg-white rounded shadow p-2">
+            <span
+              onClick={() => toggleTask(t.id)}
+              className={`cursor-pointer ${t.completed ? 'line-through text-gray-400' : ''}`}
+            >
+              {t.text}
+            </span>
+            <button onClick={() => deleteTask(t.id)} className="text-red-500">✕</button>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+}
+
+export default Assignment3;
+
+
+//  Assignment 4  //
+// Title: Task Manager with Routing (React.js + React Router)
+
+import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
+
+function Home() {
+  return (
+    <div className="p-6">
+      <h2 className="text-2xl font-bold mb-4">Home - Task Manager</h2>
+      <Assignment3 />
+    </div>
+  );
+}
+
+function About() {
+  return (
+    <div className="p-6">
+      <h2 className="text-2xl font-bold mb-2">About Page</h2>
+      <p>This Task Manager app was built using React.js and enhanced with React Router for navigation.</p>
+    </div>
+  );
+}
+
+function Assignment4() {
+  return (
+    <Router>
+      <div className="min-h-screen bg-gradient-to-r from-indigo-100 to-sky-100">
+        <nav className="flex justify-center gap-4 bg-indigo-600 text-white p-4">
+          <Link to="/" className="hover:underline">Home</Link>
+          <Link to="/about" className="hover:underline">About</Link>
+        </nav>
+
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/about" element={<About />} />
+        </Routes>
+      </div>
+    </Router>
+  );
+}
+
+export { Assignment4 };
